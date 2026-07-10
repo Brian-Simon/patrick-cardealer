@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Patrick Car Dealer — Nairobi's Trusted Car Marketplace</title>
-<meta name="description" content="Buy and sell cars in Kenya — verified dealer stock, fresh imports and owner-to-owner listings, all in one place.">
+<title>Patrick Car Dealer  Nairobi's Trusted Car Marketplace</title>
+<meta name="description" content="Buy and sell cars in Kenya  verified dealer stock, fresh imports and owner-to-owner listings, all in one place.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -109,13 +109,18 @@
   /* ---------- HERO ---------- */
   .hero{
     position:relative;
+    background:var(--sand);
+    padding:0;
+  }
+  .hero-top{
+    position:relative;
     background:
       repeating-linear-gradient(-24deg, rgba(232,163,61,0.07) 0 2px, transparent 2px 46px),
-      linear-gradient(180deg,var(--forest) 0%, var(--forest) 62%, var(--sand) 62%);
-    padding:32px 0 0;
+      linear-gradient(180deg,var(--forest) 0%, var(--forest-light) 140%);
+    padding:32px 0 52px;
     overflow:hidden;
   }
-  .hero::before{
+  .hero-top::before{
     content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;
     background:radial-gradient(circle, rgba(232,163,61,0.22) 0%, transparent 70%);
     pointer-events:none;
@@ -134,7 +139,7 @@
   }
   .hero p{font-size:15px;color:rgba(255,253,248,0.8);max-width:46ch;margin:16px 0 18px;line-height:1.5;}
 
-  .hero-stats{display:flex;gap:22px;margin-bottom:22px;flex-wrap:wrap;}
+  .hero-stats{display:flex;gap:22px;margin-bottom:24px;flex-wrap:wrap;}
   .hero-stats div{display:flex;flex-direction:column;}
   .hero-stats strong{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--marigold);line-height:1;}
   .hero-stats span{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,253,248,0.55);margin-top:3px;}
@@ -143,8 +148,9 @@
     font-family:'Space Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;
     color:rgba(255,253,248,0.5);margin-bottom:8px;
   }
-  .quick-jumps{display:flex;gap:8px;overflow-x:auto;padding-bottom:22px;scrollbar-width:none;}
-  .quick-jumps::-webkit-scrollbar{display:none;}
+  .quick-jumps{
+    display:flex;gap:8px;flex-wrap:wrap;
+  }
   .jump-pill{
     flex-shrink:0;display:flex;align-items:center;gap:6px;
     background:rgba(255,253,248,0.08);border:1px solid rgba(255,253,248,0.18);
@@ -154,6 +160,7 @@
   .jump-pill svg{width:14px;height:14px;color:var(--marigold);flex-shrink:0;}
   .jump-pill:hover{background:rgba(232,163,61,0.18);border-color:rgba(232,163,61,0.5);}
 
+  .hero-bottom{position:relative;max-width:1180px;margin:0 auto;padding:0 16px;}
   .search-card{
     background:var(--paper);
     border-radius:var(--radius);
@@ -161,8 +168,7 @@
     padding:14px;
     display:grid;
     gap:10px;
-    transform:translateY(24px);
-    margin-bottom:24px;
+    margin:-36px 0 24px;
   }
   .search-row{display:flex;gap:8px;}
   .search-row input, .search-row select{
@@ -363,6 +369,70 @@
     100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
   }
 
+  /* ---------- DETAIL VIEW ---------- */
+  .detail-view{padding:20px 0 10px;}
+  .detail-back{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;font-weight:700;color:var(--forest);margin-bottom:16px;
+  }
+  .detail-back svg{width:16px;height:16px;}
+  .detail-top{display:grid;gap:18px;}
+  .detail-slider-wrap{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+  .detail-slider-wrap .slider{aspect-ratio:4/3;}
+  .detail-info{background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;}
+  .detail-seller{font-size:12.5px;color:#7a8177;margin-bottom:4px;}
+  .detail-title{font-size:30px;color:var(--forest);margin-bottom:8px;}
+  .detail-price-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+  .detail-price{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--ink);}
+  .detail-old-price{font-family:'Space Mono',monospace;font-size:14px;text-decoration:line-through;color:#a3ab9e;}
+  .detail-ctas{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
+  .detail-ctas .btn{padding:12px 6px;font-size:12.5px;}
+  .compare-toggle{
+    width:100%;background:transparent;border:1.5px dashed var(--forest-light);color:var(--forest);
+    padding:10px;border-radius:10px;font-weight:700;font-size:12.5px;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+  }
+  .compare-toggle.active{background:var(--forest);color:var(--paper);border-style:solid;}
+  .compare-toggle svg{width:14px;height:14px;}
+
+  .spec-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0;
+    padding-top:16px;border-top:1px solid var(--line);
+  }
+  .spec-item span{display:block;font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.05em;color:#8b9285;margin-bottom:3px;}
+  .spec-item strong{font-size:14px;color:var(--ink);font-weight:700;}
+  .detail-desc{font-size:13.5px;line-height:1.6;color:#4c5348;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);}
+
+  .similar-section{margin-top:38px;}
+  .reco-section{margin-top:30px;}
+  .reco-chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .reco-chip{
+    background:var(--paper);border:1px solid var(--line);color:var(--forest);
+    padding:9px 15px;border-radius:20px;font-size:12.5px;font-weight:600;
+  }
+
+  /* ---------- COMPARE BAR + MODAL ---------- */
+  .compare-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:70;
+    background:var(--ink);color:var(--paper);
+    padding:12px 16px;display:none;align-items:center;justify-content:space-between;gap:10px;
+    box-shadow:0 -6px 20px rgba(0,0,0,0.2);
+  }
+  .compare-bar.show{display:flex;}
+  .compare-bar-info{font-size:12.5px;font-weight:600;}
+  .compare-bar-info span{color:var(--marigold);font-family:'Space Mono',monospace;}
+  .compare-bar-actions{display:flex;gap:8px;}
+  .compare-bar-actions button{font-size:12px;padding:9px 14px;}
+  .compare-clear{background:transparent;color:rgba(255,253,248,0.7);border:1px solid rgba(255,253,248,0.25);border-radius:10px;padding:9px 12px;}
+
+  .compare-modal{background:var(--paper);width:100%;max-width:760px;border-radius:20px;padding:22px 20px 26px;max-height:88vh;overflow-y:auto;animation:slideup 0.25s ease-out;}
+  .compare-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12.5px;}
+  .compare-table th, .compare-table td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  .compare-table th{font-family:'Space Mono',monospace;font-size:10.5px;text-transform:uppercase;color:#8b9285;font-weight:700;letter-spacing:0.03em;}
+  .compare-table td.car-col{font-weight:700;color:var(--forest);}
+  .compare-table img{width:100%;border-radius:8px;margin-bottom:6px;aspect-ratio:4/3;object-fit:cover;}
+  .compare-remove{color:var(--rust);font-size:11px;font-weight:700;margin-top:4px;display:inline-block;}
+
   /* ---------- MODAL ---------- */
   .modal-overlay{
     position:fixed;inset:0;background:rgba(23,33,28,0.55);
@@ -403,6 +473,9 @@
     .car-grid{grid-template-columns:repeat(2,1fr);}
     .trust-strip{grid-template-columns:repeat(4,1fr);}
     .footer-grid{grid-template-columns:2fr 1fr 1fr 1fr;}
+    .detail-top{grid-template-columns:1.1fr 1fr;align-items:start;}
+    .spec-grid{grid-template-columns:repeat(4,1fr);}
+    .compare-table img{width:90px;}
   }
   @media(min-width:880px){
     .menu-toggle{display:none;}
@@ -468,43 +541,47 @@
 
 <!-- HERO -->
 <header class="hero">
-  <div class="hero-inner">
-    <span class="eyebrow">● Nairobi · Kenya</span>
-    <h1>Find your next car<br>without the <span class="accent-line">runaround
-      <svg viewBox="0 0 220 10" preserveAspectRatio="none"><path d="M2 7c30-6 160-6 216 0" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
-    </span></h1>
-    <p>Verified dealer stock, fresh imports, and real owners selling directly — all inspected, all in one place.</p>
+  <div class="hero-top">
+    <div class="hero-inner">
+      <span class="eyebrow">● Nairobi · Kenya</span>
+      <h1>Find your next car<br>without the <span class="accent-line">runaround
+        <svg viewBox="0 0 220 10" preserveAspectRatio="none"><path d="M2 7c30-6 160-6 216 0" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+      </span></h1>
+      <p>Verified dealer stock, fresh imports, and real owners selling directly  all inspected, all in one place.</p>
 
-    <div class="hero-stats">
-      <div><strong>500+</strong><span>Live listings</span></div>
-      <div><strong>3</strong><span>Categories</span></div>
-      <div><strong>&lt;24h</strong><span>Avg. response</span></div>
+      <div class="hero-stats">
+        <div><strong>500+</strong><span>Live listings</span></div>
+        <div><strong>3</strong><span>Categories</span></div>
+        <div><strong>&lt;24h</strong><span>Avg. response</span></div>
+      </div>
+
+      <p class="jump-label">Jump straight to →</p>
+      <div class="quick-jumps">
+        <a class="jump-pill" href="#deal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Deal of the day
+        </a>
+        <a class="jump-pill" href="#listings" data-jump="kenya">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+          Kenya stock
+        </a>
+        <a class="jump-pill" href="#listings" data-jump="import">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2c2.5 3 4 7 4 10s-1.5 7-4 10c-2.5-3-4-7-4-10s1.5-7 4-10z"/></svg>
+          Imports
+        </a>
+        <a class="jump-pill" href="#listings" data-jump="p2p">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Peer-to-peer
+        </a>
+        <a class="jump-pill" href="#sell">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          Sell your car
+        </a>
+      </div>
     </div>
+  </div>
 
-    <p class="jump-label">Jump straight to →</p>
-    <div class="quick-jumps">
-      <a class="jump-pill" href="#deal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        Deal of the day
-      </a>
-      <a class="jump-pill" href="#listings" data-jump="kenya">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-        Kenya stock
-      </a>
-      <a class="jump-pill" href="#listings" data-jump="import">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2c2.5 3 4 7 4 10s-1.5 7-4 10c-2.5-3-4-7-4-10s1.5-7 4-10z"/></svg>
-        Imports
-      </a>
-      <a class="jump-pill" href="#listings" data-jump="p2p">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Peer-to-peer
-      </a>
-      <a class="jump-pill" href="#sell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-        Sell your car
-      </a>
-    </div>
-
+  <div class="hero-bottom">
     <div class="search-card">
       <div class="search-row">
         <input type="text" id="searchInput" placeholder="Search e.g. Toyota Axio, Prado, Demio">
@@ -527,6 +604,7 @@
 </header>
 
 <main class="container">
+  <div id="browseView">
 
   <!-- DEAL OF THE DAY -->
   <section class="section" id="deal">
@@ -561,7 +639,7 @@
     </div>
     <div class="trust-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-      <div><h4>Duty cleared imports</h4><p>Import status is shown upfront — no surprises at KRA.</p></div>
+      <div><h4>Duty cleared imports</h4><p>Import status is shown upfront  no surprises at KRA.</p></div>
     </div>
     <div class="trust-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
@@ -576,9 +654,13 @@
   <!-- SELL YOUR CAR -->
   <section class="sell-band" id="sell">
     <h2>Selling your own car? List it free.</h2>
-    <p>Skip the dealer margin. Reach thousands of serious buyers directly on the peer-to-peer marketplace — Patrick Car Dealer just handles the introductions.</p>
+    <p>Skip the dealer margin. Reach thousands of serious buyers directly on the peer-to-peer marketplace  Patrick Car Dealer just handles the introductions.</p>
     <button class="btn btn-block" style="background:var(--ink);color:var(--paper);max-width:240px;" id="sellBtn">List your car</button>
   </section>
+
+  </div><!-- /browseView -->
+
+  <section class="detail-view" id="detailView" style="display:none;"></section>
 
 </main>
 
@@ -587,7 +669,7 @@
   <div class="container footer-grid">
     <div class="fcol">
       <h3>Patrick Car Dealer</h3>
-      <p>Nairobi's marketplace for Kenya-available stock, fresh imports and owner-to-owner listings — all vetted, all in one place.</p>
+      <p>Nairobi's marketplace for Kenya-available stock, fresh imports and owner-to-owner listings  all vetted, all in one place.</p>
     </div>
     <div class="fcol">
       <h5>Browse</h5>
@@ -616,6 +698,29 @@
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.2-.4c.1-.1.1-.3 0-.4s-.7-1.6-.9-2.2-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4A3.4 3.4 0 0 0 5.8 10a5.9 5.9 0 0 0 1.3 3.2A13.4 13.4 0 0 0 12.2 18c.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1a3.2 3.2 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
 </a>
 
+<!-- COMPARE BAR -->
+<div class="compare-bar" id="compareBar">
+  <div class="compare-bar-info"><span id="compareCount">0</span> car(s) selected to compare</div>
+  <div class="compare-bar-actions">
+    <button class="compare-clear" id="compareClear">Clear</button>
+    <button class="btn btn-buy" id="compareOpen">Compare</button>
+  </div>
+</div>
+
+<!-- COMPARE MODAL -->
+<div class="modal-overlay" id="compareOverlay">
+  <div class="compare-modal">
+    <div class="modal-head">
+      <h3>Compare cars</h3>
+      <button class="modal-close" id="compareModalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <p class="sub">Side-by-side specs for the cars you've picked. Remove any to swap them out.</p>
+    <div id="compareTableWrap"></div>
+  </div>
+</div>
+
 <!-- ENQUIRY / BUY MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
@@ -625,7 +730,7 @@
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
     </div>
-    <p class="sub" id="modalSub">Tell us a bit about you — we'll come back to you on WhatsApp or by call.</p>
+    <p class="sub" id="modalSub">Tell us a bit about you  we'll come back to you on WhatsApp or by call.</p>
     <form id="enquiryForm">
       <div class="field">
         <label for="fName">Your name</label>
@@ -641,7 +746,7 @@
       </div>
       <div class="field">
         <label for="fMessage">Message (optional)</label>
-        <textarea id="fMessage" placeholder="Any questions — mileage, price negotiation, viewing time..."></textarea>
+        <textarea id="fMessage" placeholder="Any questions  mileage, price negotiation, viewing time..."></textarea>
       </div>
       <button type="submit" class="btn btn-whatsapp btn-block" style="padding:13px;font-size:14px;">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.2-.4c.1-.1.1-.3 0-.4s-.7-1.6-.9-2.2-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4A3.4 3.4 0 0 0 5.8 10a5.9 5.9 0 0 0 1.3 3.2A13.4 13.4 0 0 0 12.2 18c.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1a3.2 3.2 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
@@ -783,12 +888,22 @@ function waLink(car, mode){
 }
 
 // ---------- RENDER CARDS ----------
+function compareToggleHTML(c){
+  const active = compareList.includes(c.id);
+  return `
+    <button class="compare-toggle${active?' active':''}" data-compare="${c.id}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      ${active ? "Added to compare" : "Add to compare"}
+    </button>
+  `;
+}
+
 function cardHTML(c){
   const slides = c.images.map(id => `<img src="${img(id)}" alt="${c.title}" loading="lazy">`).join("");
   const dots = c.images.map((_,i)=>`<i class="${i===0?'active':''}"></i>`).join("");
   const badges = c.badges.map(b=>`<span class="badge ${b}">${badgeLabel(b)}</span>`).join("");
   return `
-    <article class="car-card" data-cat="${c.category}" data-best="${c.bestValue}">
+    <article class="car-card" data-cat="${c.category}" data-best="${c.bestValue}" data-id="${c.id}">
       <div class="slider-wrap">
         <div class="slider" data-slider>${slides}</div>
         <div class="badge-row">${badges}</div>
@@ -810,6 +925,7 @@ function cardHTML(c){
           <a class="btn btn-call" href="tel:+${DEALER_PHONE}">Call</a>
           <button class="btn btn-buy" data-buy="${c.id}">Buy now</button>
         </div>
+        ${compareToggleHTML(c)}
       </div>
     </article>
   `;
@@ -818,6 +934,7 @@ function cardHTML(c){
 let activeFilter = "all";
 let searchTerm = "";
 let budgetCap = "";
+let compareList = [];
 
 function applyFilters(){
   return CARS.filter(c=>{
@@ -834,15 +951,34 @@ function applyFilters(){
 function renderGrid(){
   const list = applyFilters();
   document.getElementById("carGrid").innerHTML = list.map(cardHTML).join("") ||
-    `<p style="grid-column:1/-1;text-align:center;color:#7a8177;padding:30px 0;">No cars match that search yet — try a different make or budget.</p>`;
+    `<p style="grid-column:1/-1;text-align:center;color:#7a8177;padding:30px 0;">No cars match that search yet  try a different make or budget.</p>`;
   document.getElementById("resultCount").textContent = `${list.length} car${list.length!==1?"s":""}`;
-  initSliders();
-  bindBuyButtons();
+  initSliders(document.getElementById("carGrid"));
 }
 
+// ---------- GLOBAL DELEGATED INTERACTIONS ----------
+// One listener covers Buy Now, Add to compare, and opening a listing's detail page 
+// works for the deal banner, the main grid, and the similar-vehicles grid alike.
+document.addEventListener("click", e=>{
+  const buyBtn = e.target.closest("[data-buy]");
+  if(buyBtn){
+    const car = CARS.find(c=>c.id===Number(buyBtn.dataset.buy));
+    openModal(car, "buy");
+    return;
+  }
+  const cmpBtn = e.target.closest("[data-compare]");
+  if(cmpBtn){
+    toggleCompare(Number(cmpBtn.dataset.compare));
+    return;
+  }
+  if(e.target.closest(".car-ctas")) return;
+  const card = e.target.closest(".car-card");
+  if(card){ openDetail(Number(card.dataset.id)); }
+});
+
 // ---------- SLIDER DOT SYNC ----------
-function initSliders(){
-  document.querySelectorAll("[data-slider]").forEach(slider=>{
+function initSliders(scope){
+  scope.querySelectorAll("[data-slider]").forEach(slider=>{
     const dotsWrap = slider.parentElement.querySelector("[data-dots]");
     const dots = dotsWrap.querySelectorAll("i");
     slider.addEventListener("scroll", ()=>{
@@ -867,10 +1003,10 @@ function openModal(car, mode){
     modalSub.textContent = "Confirm your details and we'll lock in the deal and arrange a viewing.";
   } else if(mode==="sell"){
     modalTitle.textContent = "List your car";
-    modalSub.textContent = "Tell us about your car — we'll get back to you to publish it on the marketplace.";
+    modalSub.textContent = "Tell us about your car  we'll get back to you to publish it on the marketplace.";
   } else {
     modalTitle.textContent = "Make an enquiry";
-    modalSub.textContent = "Tell us a bit about you — we'll come back to you on WhatsApp or by call.";
+    modalSub.textContent = "Tell us a bit about you  we'll come back to you on WhatsApp or by call.";
   }
   fCar.value = car ? car.title : "";
   fCar.placeholder = mode==="sell" ? "e.g. Toyota Vitz 2016, 90,000km" : "e.g. Toyota Axio 2015";
@@ -901,16 +1037,197 @@ document.getElementById("enquiryForm").addEventListener("submit", e=>{
   e.target.reset();
 });
 
-function bindBuyButtons(){
-  document.querySelectorAll("[data-buy]").forEach(btn=>{
+document.getElementById("sellBtn").addEventListener("click", ()=> openModal(null, "sell"));
+
+// ---------- DETAIL VIEW ----------
+const browseView = document.getElementById("browseView");
+const detailView = document.getElementById("detailView");
+
+function buildDescription(c){
+  const originStory = {
+    kenya:`sourced and prepped locally, ready for immediate viewing in Nairobi`,
+    import:`brought in as a direct import, with duty status confirmed before listing`,
+    p2p:`listed directly by its current owner through our peer-to-peer marketplace`
+  }[c.category];
+  return `This ${c.year} ${c.title.replace(/\s?\d{4}$/,"")} comes with ${c.mileage} on the clock, ${c.trans.toLowerCase()} transmission and runs on ${c.fuel.toLowerCase()}. It's ${originStory}. ${c.badges.includes("best") ? "It's currently priced below comparable units on the lot, making it one of our best-value picks. " : ""}Reach out on WhatsApp or call to arrange a viewing or a test drive.`;
+}
+
+function budgetBucketFor(price){
+  if(price <= 1000000) return {val:"1000000", label:"Under KSh 1M"};
+  if(price <= 2000000) return {val:"2000000", label:"Under KSh 2M"};
+  if(price <= 4000000) return {val:"4000000", label:"Under KSh 4M"};
+  return {val:"99999999", label:"KSh 4M+"};
+}
+
+function recoChipsHTML(c){
+  const make = c.title.split(" ")[0];
+  const otherCats = ["kenya","import","p2p"].filter(cat=>cat!==c.category);
+  const bucket = budgetBucketFor(c.price);
+  const chips = [
+    {label:`More ${make}`, action:()=>{ searchTerm = make; budgetCap=""; document.getElementById("searchInput").value = make; renderGrid(); }},
+    {label:bucket.label, action:()=>{ budgetCap = bucket.val; searchTerm=""; document.getElementById("searchInput").value=""; document.getElementById("budgetSelect").value = bucket.val; renderGrid(); }},
+    {label:badgeLabel(otherCats[0]), action:()=>setFilter(otherCats[0])},
+    {label:badgeLabel(otherCats[1]), action:()=>setFilter(otherCats[1])},
+    {label:"Best value picks", action:()=>setFilter("best")}
+  ];
+  window.__recoChips = chips;
+  return chips.map((ch,i)=>`<button class="reco-chip" data-reco="${i}">${ch.label}</button>`).join("");
+}
+
+function openDetail(id){
+  const c = CARS.find(x=>x.id===id);
+  if(!c) return;
+  const slides = c.images.map(imgId => `<img src="${img(imgId,900)}" alt="${c.title}" loading="lazy">`).join("");
+  const dots = c.images.map((_,i)=>`<i class="${i===0?'active':''}"></i>`).join("");
+  const badges = c.badges.map(b=>`<span class="badge ${b}">${badgeLabel(b)}</span>`).join("");
+  const similar = CARS.filter(x=>x.category===c.category && x.id!==c.id).slice(0,3);
+
+  detailView.innerHTML = `
+    <button class="detail-back" id="detailBack">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      Back to listings
+    </button>
+    <div class="detail-top">
+      <div class="detail-slider-wrap">
+        <div class="slider" data-slider>${slides}</div>
+        <div class="badge-row">${badges}</div>
+        <div class="stamp"><span>${c.stamp.replace("\n","<br>")}</span></div>
+        <div class="slider-dots" data-dots>${dots}</div>
+      </div>
+      <div class="detail-info">
+        <div class="detail-seller">${c.seller}</div>
+        <h1 class="detail-title">${c.title}</h1>
+        <div class="detail-price-row">
+          <span class="detail-price mono">${ksh(c.price)}</span>
+          ${c.oldPrice ? `<span class="detail-old-price">${ksh(c.oldPrice)}</span>` : ""}
+        </div>
+        <div class="detail-ctas">
+          <a class="btn btn-whatsapp" href="${waLink(c,'enquire')}" target="_blank">WhatsApp</a>
+          <a class="btn btn-call" href="tel:+${DEALER_PHONE}">Call</a>
+          <button class="btn btn-buy" data-buy="${c.id}">Buy now</button>
+        </div>
+        ${compareToggleHTML(c)}
+        <div class="spec-grid">
+          <div class="spec-item"><span>Year</span><strong>${c.year}</strong></div>
+          <div class="spec-item"><span>Mileage</span><strong>${c.mileage}</strong></div>
+          <div class="spec-item"><span>Transmission</span><strong>${c.trans}</strong></div>
+          <div class="spec-item"><span>Fuel</span><strong>${c.fuel}</strong></div>
+        </div>
+        <p class="detail-desc">${buildDescription(c)}</p>
+      </div>
+    </div>
+
+    <div class="reco-section">
+      <div class="section-head"><h2 style="font-size:22px;">Recommended searches</h2></div>
+      <div class="reco-chips">${recoChipsHTML(c)}</div>
+    </div>
+
+    ${similar.length ? `
+    <div class="similar-section">
+      <div class="section-head"><h2 style="font-size:22px;">Similar vehicles</h2></div>
+      <div class="car-grid" id="similarGrid">${similar.map(cardHTML).join("")}</div>
+    </div>` : ""}
+  `;
+
+  browseView.style.display = "none";
+  detailView.style.display = "block";
+  window.scrollTo({top:0, behavior:"instant" in window ? "instant" : "auto"});
+  location.hash = `car-${c.id}`;
+
+  initSliders(detailView);
+  const similarGrid = document.getElementById("similarGrid");
+  if(similarGrid) initSliders(similarGrid);
+
+  document.getElementById("detailBack").addEventListener("click", showBrowse);
+  detailView.querySelectorAll("[data-reco]").forEach(btn=>{
     btn.addEventListener("click", ()=>{
-      const car = CARS.find(c=>c.id===Number(btn.dataset.buy));
-      openModal(car, "buy");
+      window.__recoChips[Number(btn.dataset.reco)].action();
+      showBrowse();
+      document.getElementById("listings").scrollIntoView({behavior:"smooth"});
     });
   });
 }
 
-document.getElementById("sellBtn").addEventListener("click", ()=> openModal(null, "sell"));
+function showBrowse(){
+  detailView.style.display = "none";
+  browseView.style.display = "";
+  history.replaceState(null, "", location.pathname + location.search);
+}
+
+// ---------- COMPARE ----------
+const compareBar = document.getElementById("compareBar");
+const compareCountEl = document.getElementById("compareCount");
+const compareOverlay = document.getElementById("compareOverlay");
+
+function toggleCompare(id){
+  const idx = compareList.indexOf(id);
+  if(idx>-1){
+    compareList.splice(idx,1);
+  } else {
+    if(compareList.length>=3){
+      compareList.shift();
+    }
+    compareList.push(id);
+  }
+  updateCompareUI();
+}
+
+function updateCompareUI(){
+  document.querySelectorAll("[data-compare]").forEach(btn=>{
+    const active = compareList.includes(Number(btn.dataset.compare));
+    btn.classList.toggle("active", active);
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      ${active ? "Added to compare" : "Add to compare"}
+    `;
+  });
+  compareCountEl.textContent = compareList.length;
+  compareBar.classList.toggle("show", compareList.length>0);
+}
+
+function renderCompareTable(){
+  const cars = compareList.map(id=>CARS.find(c=>c.id===id)).filter(Boolean);
+  if(!cars.length){
+    document.getElementById("compareTableWrap").innerHTML = `<p style="color:#7a8177;font-size:13px;">No cars selected yet  tap "Add to compare" on any listing.</p>`;
+    return;
+  }
+  const rows = [
+    ["Price", c=>ksh(c.price)],
+    ["Category", c=>badgeLabel(c.category)],
+    ["Year", c=>c.year],
+    ["Mileage", c=>c.mileage],
+    ["Transmission", c=>c.trans],
+    ["Fuel", c=>c.fuel],
+    ["Seller", c=>c.seller]
+  ];
+  document.getElementById("compareTableWrap").innerHTML = `
+    <table class="compare-table">
+      <tr><th></th>${cars.map(c=>`<td class="car-col">
+        <img src="${img(c.images[0])}" alt="${c.title}">
+        ${c.title}
+        <span class="compare-remove" data-uncompare="${c.id}">Remove</span>
+      </td>`).join("")}</tr>
+      ${rows.map(([label,fn])=>`<tr><th>${label}</th>${cars.map(c=>`<td>${fn(c)}</td>`).join("")}</tr>`).join("")}
+    </table>
+  `;
+  document.querySelectorAll("[data-uncompare]").forEach(el=>{
+    el.addEventListener("click", ()=>{
+      toggleCompare(Number(el.dataset.uncompare));
+      renderCompareTable();
+    });
+  });
+}
+
+document.getElementById("compareOpen").addEventListener("click", ()=>{
+  renderCompareTable();
+  compareOverlay.classList.add("open");
+});
+document.getElementById("compareModalClose").addEventListener("click", ()=> compareOverlay.classList.remove("open"));
+compareOverlay.addEventListener("click", e=>{ if(e.target===compareOverlay) compareOverlay.classList.remove("open"); });
+document.getElementById("compareClear").addEventListener("click", ()=>{
+  compareList = [];
+  updateCompareUI();
+});
 
 // ---------- CHIPS / SEARCH ----------
 function setFilter(key){
