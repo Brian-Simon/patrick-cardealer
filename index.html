@@ -76,21 +76,83 @@
   }
   .icon-btn svg{width:18px;height:18px;}
 
+  /* ---------- NAV MENU (hamburger + links) ---------- */
+  .menu-toggle{
+    background:rgba(255,255,255,0.1);color:var(--paper);
+    width:38px;height:38px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;flex-shrink:0;
+  }
+  .menu-toggle svg{width:18px;height:18px;}
+  .menu-toggle .icon-close{display:none;}
+  .menu-toggle.open .icon-open{display:none;}
+  .menu-toggle.open .icon-close{display:block;}
+
+  .nav-links{display:none;}
+
+  .mobile-menu{
+    max-height:0;overflow:hidden;
+    background:var(--ink);
+    transition:max-height 0.3s ease;
+  }
+  .mobile-menu.open{max-height:420px;}
+  .mobile-menu-inner{padding:6px 16px 18px;display:flex;flex-direction:column;}
+  .mobile-menu a{
+    display:flex;align-items:center;gap:10px;
+    padding:12px 4px;color:rgba(255,253,248,0.85);
+    font-size:14.5px;font-weight:600;
+    border-bottom:1px solid rgba(255,253,248,0.08);
+  }
+  .mobile-menu a svg{width:16px;height:16px;color:var(--marigold);flex-shrink:0;}
+  .mobile-menu a:last-child{border-bottom:none;}
+
   /* ---------- HERO ---------- */
   .hero{
-    background:linear-gradient(180deg,var(--forest) 0%, var(--forest) 55%, var(--sand) 55%);
-    padding:28px 0 0;
+    position:relative;
+    background:
+      repeating-linear-gradient(-24deg, rgba(232,163,61,0.07) 0 2px, transparent 2px 46px),
+      linear-gradient(180deg,var(--forest) 0%, var(--forest) 62%, var(--sand) 62%);
+    padding:32px 0 0;
+    overflow:hidden;
   }
-  .hero-inner{max-width:1180px;margin:0 auto;padding:0 16px;color:var(--paper);}
+  .hero::before{
+    content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;
+    background:radial-gradient(circle, rgba(232,163,61,0.22) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;max-width:1180px;margin:0 auto;padding:0 16px;color:var(--paper);}
   .eyebrow{
     display:inline-flex;align-items:center;gap:6px;
     background:rgba(232,163,61,0.15);color:var(--marigold);
     font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
-    padding:5px 10px;border-radius:20px;margin-bottom:14px;border:1px solid rgba(232,163,61,0.35);
+    padding:5px 10px;border-radius:20px;margin-bottom:16px;border:1px solid rgba(232,163,61,0.35);
   }
-  .hero h1{font-size:44px;color:var(--paper);margin-bottom:10px;}
-  .hero h1 em{font-style:normal;color:var(--marigold);}
-  .hero p{font-size:15px;color:rgba(255,253,248,0.8);max-width:46ch;margin-bottom:20px;line-height:1.5;}
+  .hero h1{font-size:50px;color:var(--paper);margin-bottom:6px;}
+  .hero h1 .accent-line{position:relative;display:inline-block;color:var(--marigold);}
+  .hero h1 .accent-line svg{
+    position:absolute;left:0;bottom:-6px;width:100%;height:10px;
+  }
+  .hero p{font-size:15px;color:rgba(255,253,248,0.8);max-width:46ch;margin:16px 0 18px;line-height:1.5;}
+
+  .hero-stats{display:flex;gap:22px;margin-bottom:22px;flex-wrap:wrap;}
+  .hero-stats div{display:flex;flex-direction:column;}
+  .hero-stats strong{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--marigold);line-height:1;}
+  .hero-stats span{font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,253,248,0.55);margin-top:3px;}
+
+  .jump-label{
+    font-family:'Space Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;
+    color:rgba(255,253,248,0.5);margin-bottom:8px;
+  }
+  .quick-jumps{display:flex;gap:8px;overflow-x:auto;padding-bottom:22px;scrollbar-width:none;}
+  .quick-jumps::-webkit-scrollbar{display:none;}
+  .jump-pill{
+    flex-shrink:0;display:flex;align-items:center;gap:6px;
+    background:rgba(255,253,248,0.08);border:1px solid rgba(255,253,248,0.18);
+    color:var(--paper);padding:9px 14px;border-radius:20px;font-size:12.5px;font-weight:600;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .jump-pill svg{width:14px;height:14px;color:var(--marigold);flex-shrink:0;}
+  .jump-pill:hover{background:rgba(232,163,61,0.18);border-color:rgba(232,163,61,0.5);}
 
   .search-card{
     background:var(--paper);
@@ -333,6 +395,7 @@
   /* ---------- DESKTOP ENHANCEMENTS ---------- */
   @media(min-width:720px){
     .hero h1{font-size:58px;}
+    .hero p{font-size:16px;}
     .search-card{grid-template-columns:1fr;}
     .search-row{flex-wrap:nowrap;}
     .deal-banner{grid-template-columns:1fr 1fr;align-items:stretch;}
@@ -340,6 +403,18 @@
     .car-grid{grid-template-columns:repeat(2,1fr);}
     .trust-strip{grid-template-columns:repeat(4,1fr);}
     .footer-grid{grid-template-columns:2fr 1fr 1fr 1fr;}
+  }
+  @media(min-width:880px){
+    .menu-toggle{display:none;}
+    .mobile-menu{display:none;}
+    .nav-links{
+      display:flex;align-items:center;gap:22px;margin-right:auto;margin-left:28px;
+    }
+    .nav-links a{
+      font-size:13.5px;font-weight:600;color:rgba(255,253,248,0.8);
+      padding:4px 0;border-bottom:2px solid transparent;
+    }
+    .nav-links a:hover{color:var(--paper);border-color:var(--marigold);}
   }
   @media(min-width:1024px){
     .car-grid{grid-template-columns:repeat(3,1fr);}
@@ -352,10 +427,23 @@
 <!-- NAV -->
 <nav class="topnav">
   <div class="topnav-inner">
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
     <div class="brand">
       <div class="brand-mark">P</div>
       <div class="brand-text">PATRICK <span>CAR DEALER</span></div>
     </div>
+    <ul class="nav-links">
+      <li><a href="#deal">Deal of the day</a></li>
+      <li><a href="#listings" data-jump="kenya">Kenya stock</a></li>
+      <li><a href="#listings" data-jump="import">Imports</a></li>
+      <li><a href="#listings" data-jump="p2p">Peer-to-peer</a></li>
+      <li><a href="#listings" data-jump="best">Best value</a></li>
+      <li><a href="#sell">Sell your car</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
     <div class="nav-actions">
       <a class="icon-btn" href="tel:+254722555330" aria-label="Call Patrick Car Dealer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.79.65 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.42a2 2 0 0 1 2.11-.45c.86.31 1.75.53 2.65.65A2 2 0 0 1 22 16.92z"/></svg>
@@ -365,14 +453,57 @@
       </a>
     </div>
   </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <a href="#deal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Deal of the day</a>
+      <a href="#listings" data-jump="kenya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Kenya stock</a>
+      <a href="#listings" data-jump="import"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2c2.5 3 4 7 4 10s-1.5 7-4 10c-2.5-3-4-7-4-10s1.5-7 4-10z"/></svg>Fresh imports</a>
+      <a href="#listings" data-jump="p2p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Peer-to-peer</a>
+      <a href="#listings" data-jump="best"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.9 6.3L22 9l-5 4.9L18.2 21 12 17.6 5.8 21 7 13.9 2 9l7.1-.7z"/></svg>Best value</a>
+      <a href="#sell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Sell your car</a>
+      <a href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.79.65 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.42a2 2 0 0 1 2.11-.45c.86.31 1.75.53 2.65.65A2 2 0 0 1 22 16.92z"/></svg>Contact</a>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
     <span class="eyebrow">● Nairobi · Kenya</span>
-    <h1>Find your next car <em>without the runaround.</em></h1>
+    <h1>Find your next car<br>without the <span class="accent-line">runaround
+      <svg viewBox="0 0 220 10" preserveAspectRatio="none"><path d="M2 7c30-6 160-6 216 0" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+    </span></h1>
     <p>Verified dealer stock, fresh imports, and real owners selling directly — all inspected, all in one place.</p>
+
+    <div class="hero-stats">
+      <div><strong>500+</strong><span>Live listings</span></div>
+      <div><strong>3</strong><span>Categories</span></div>
+      <div><strong>&lt;24h</strong><span>Avg. response</span></div>
+    </div>
+
+    <p class="jump-label">Jump straight to →</p>
+    <div class="quick-jumps">
+      <a class="jump-pill" href="#deal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Deal of the day
+      </a>
+      <a class="jump-pill" href="#listings" data-jump="kenya">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        Kenya stock
+      </a>
+      <a class="jump-pill" href="#listings" data-jump="import">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2c2.5 3 4 7 4 10s-1.5 7-4 10c-2.5-3-4-7-4-10s1.5-7 4-10z"/></svg>
+        Imports
+      </a>
+      <a class="jump-pill" href="#listings" data-jump="p2p">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Peer-to-peer
+      </a>
+      <a class="jump-pill" href="#sell">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        Sell your car
+      </a>
+    </div>
 
     <div class="search-card">
       <div class="search-row">
@@ -443,7 +574,7 @@
   </section>
 
   <!-- SELL YOUR CAR -->
-  <section class="sell-band">
+  <section class="sell-band" id="sell">
     <h2>Selling your own car? List it free.</h2>
     <p>Skip the dealer margin. Reach thousands of serious buyers directly on the peer-to-peer marketplace — Patrick Car Dealer just handles the introductions.</p>
     <button class="btn btn-block" style="background:var(--ink);color:var(--paper);max-width:240px;" id="sellBtn">List your car</button>
@@ -452,7 +583,7 @@
 </main>
 
 <!-- FOOTER -->
-<footer>
+<footer id="contact">
   <div class="container footer-grid">
     <div class="fcol">
       <h3>Patrick Car Dealer</h3>
@@ -782,13 +913,16 @@ function bindBuyButtons(){
 document.getElementById("sellBtn").addEventListener("click", ()=> openModal(null, "sell"));
 
 // ---------- CHIPS / SEARCH ----------
+function setFilter(key){
+  activeFilter = key;
+  document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active", c.dataset.filter===key));
+  renderGrid();
+}
+
 document.getElementById("chipRow").addEventListener("click", e=>{
   const chip = e.target.closest(".chip");
   if(!chip) return;
-  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
-  chip.classList.add("active");
-  activeFilter = chip.dataset.filter;
-  renderGrid();
+  setFilter(chip.dataset.filter);
 });
 
 document.getElementById("searchBtn").addEventListener("click", ()=>{
@@ -799,6 +933,34 @@ document.getElementById("searchBtn").addEventListener("click", ()=>{
 });
 document.getElementById("searchInput").addEventListener("keydown", e=>{
   if(e.key==="Enter"){ document.getElementById("searchBtn").click(); }
+});
+
+// ---------- NAV MENU + QUICK JUMPS ----------
+const menuToggle = document.getElementById("menuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+
+function closeMobileMenu(){
+  menuToggle.classList.remove("open");
+  menuToggle.setAttribute("aria-expanded","false");
+  mobileMenu.classList.remove("open");
+}
+menuToggle.addEventListener("click", ()=>{
+  const isOpen = mobileMenu.classList.toggle("open");
+  menuToggle.classList.toggle("open", isOpen);
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+});
+
+// Any link carrying data-jump filters the listings as it scrolls to them;
+// covers hero quick-jump pills, the nav-bar menu, and the mobile dropdown.
+document.querySelectorAll("[data-jump]").forEach(link=>{
+  link.addEventListener("click", ()=>{
+    setFilter(link.dataset.jump);
+    closeMobileMenu();
+  });
+});
+// Plain section links in the mobile menu just need to close the panel after the jump.
+document.querySelectorAll(".mobile-menu a:not([data-jump])").forEach(link=>{
+  link.addEventListener("click", closeMobileMenu);
 });
 
 // ---------- INIT ----------
