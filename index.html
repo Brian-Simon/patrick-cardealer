@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Patrick Car Dealer — Nairobi's Trusted Car Marketplace</title>
+<meta name="description" content="Buy and sell cars in Kenya — verified dealer stock, fresh imports and owner-to-owner listings, all in one place.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17211C;
+    --forest:#1F4D3A;
+    --forest-light:#2E6B50;
+    --marigold:#E8A33D;
+    --marigold-dark:#C4832A;
+    --rust:#BF4E30;
+    --sand:#F2ECDD;
+    --paper:#FFFDF8;
+    --stamp:#A2273A;
+    --line:rgba(23,33,28,0.12);
+    --whatsapp:#25D366;
+    --shadow: 0 8px 24px rgba(23,33,28,0.10);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:70px;
+  }
+  h1,h2,h3,.display{
+    font-family:'Bebas Neue',sans-serif;
+    letter-spacing:0.02em;
+    line-height:0.95;
+    margin:0;
+    color:var(--forest);
+  }
+  .mono{font-family:'Space Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  button{font-family:inherit;cursor:pointer;border:none;}
+  .container{max-width:1180px;margin:0 auto;padding:0 16px;}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+  :focus-visible{outline:3px solid var(--marigold);outline-offset:2px;}
+
+  /* ---------- NAV ---------- */
+  .topnav{
+    position:sticky;top:0;z-index:50;
+    background:var(--forest);
+    color:var(--paper);
+    box-shadow:0 2px 10px rgba(0,0,0,0.15);
+  }
+  .topnav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 16px;max-width:1180px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:38px;height:38px;border-radius:8px;background:var(--marigold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Bebas Neue',sans-serif;color:var(--forest);font-size:20px;
+    flex-shrink:0;
+  }
+  .brand-text{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.03em;}
+  .brand-text span{color:var(--marigold);}
+  .nav-actions{display:flex;align-items:center;gap:8px;}
+  .icon-btn{
+    background:rgba(255,255,255,0.1);color:var(--paper);
+    width:38px;height:38px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .icon-btn svg{width:18px;height:18px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:linear-gradient(180deg,var(--forest) 0%, var(--forest) 55%, var(--sand) 55%);
+    padding:28px 0 0;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;padding:0 16px;color:var(--paper);}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(232,163,61,0.15);color:var(--marigold);
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+    padding:5px 10px;border-radius:20px;margin-bottom:14px;border:1px solid rgba(232,163,61,0.35);
+  }
+  .hero h1{font-size:44px;color:var(--paper);margin-bottom:10px;}
+  .hero h1 em{font-style:normal;color:var(--marigold);}
+  .hero p{font-size:15px;color:rgba(255,253,248,0.8);max-width:46ch;margin-bottom:20px;line-height:1.5;}
+
+  .search-card{
+    background:var(--paper);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:14px;
+    display:grid;
+    gap:10px;
+    transform:translateY(24px);
+    margin-bottom:24px;
+  }
+  .search-row{display:flex;gap:8px;}
+  .search-row input, .search-row select{
+    flex:1;min-width:0;
+    padding:12px 12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    background:var(--sand);
+    color:var(--ink);
+  }
+  .search-btn{
+    background:var(--forest);color:var(--paper);
+    padding:12px 18px;border-radius:10px;font-weight:700;font-size:14px;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+  }
+
+  /* ---------- DEAL OF THE DAY ---------- */
+  .section{padding:36px 0 8px;}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;gap:10px;}
+  .section-head h2{font-size:28px;}
+  .section-head .tag-count{font-family:'Space Mono',monospace;font-size:12px;color:var(--forest-light);}
+
+  .deal-banner{
+    background:var(--ink);
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+    color:var(--paper);
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .deal-banner .deal-img{position:relative;aspect-ratio:16/10;overflow:hidden;}
+  .deal-banner .deal-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.75);}
+  .deal-ribbon{
+    position:absolute;top:14px;left:14px;
+    background:var(--rust);color:var(--paper);
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+    padding:6px 12px;border-radius:20px;display:flex;align-items:center;gap:6px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.25);
+  }
+  .deal-ribbon .dot{width:6px;height:6px;border-radius:50%;background:var(--paper);animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+  .deal-body{padding:18px;}
+  .deal-body h3{font-size:26px;color:var(--paper);margin-bottom:4px;}
+  .deal-specs{font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,253,248,0.65);margin-bottom:12px;}
+  .deal-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+  .deal-price{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--marigold);}
+  .deal-old{font-family:'Space Mono',monospace;font-size:14px;text-decoration:line-through;color:rgba(255,253,248,0.45);}
+  .countdown{
+    display:flex;gap:8px;margin-bottom:16px;
+  }
+  .countdown div{
+    background:rgba(255,253,248,0.08);border:1px solid rgba(255,253,248,0.15);
+    border-radius:8px;padding:8px 10px;text-align:center;min-width:56px;
+  }
+  .countdown span{display:block;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--marigold);}
+  .countdown small{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,253,248,0.55);}
+  .deal-ctas{display:flex;gap:8px;flex-wrap:wrap;}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    padding:11px 16px;border-radius:10px;font-weight:700;font-size:13px;
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    white-space:nowrap;
+  }
+  .btn svg{width:15px;height:15px;flex-shrink:0;}
+  .btn-whatsapp{background:var(--whatsapp);color:#fff;}
+  .btn-call{background:var(--paper);color:var(--forest);border:1px solid rgba(23,33,28,0.15);}
+  .btn-buy{background:var(--marigold);color:var(--ink);}
+  .btn-ghost{background:transparent;color:var(--paper);border:1px solid rgba(255,253,248,0.3);}
+  .btn-block{width:100%;}
+  .btn-outline-forest{background:transparent;border:1.5px solid var(--forest);color:var(--forest);}
+
+  /* ---------- FILTER CHIPS ---------- */
+  .chip-row{
+    display:flex;gap:8px;overflow-x:auto;padding:4px 0 18px;
+    scrollbar-width:none;
+  }
+  .chip-row::-webkit-scrollbar{display:none;}
+  .chip{
+    flex-shrink:0;padding:9px 16px;border-radius:20px;
+    background:var(--paper);border:1px solid var(--line);
+    font-size:13px;font-weight:600;color:var(--forest);
+  }
+  .chip.active{background:var(--forest);color:var(--paper);border-color:var(--forest);}
+
+  /* ---------- CAR GRID ---------- */
+  .car-grid{
+    display:grid;grid-template-columns:1fr;gap:18px;
+  }
+  .car-card{
+    background:var(--paper);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);
+    display:flex;flex-direction:column;
+  }
+  .slider-wrap{position:relative;}
+  .slider{
+    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;aspect-ratio:4/3;
+  }
+  .slider::-webkit-scrollbar{display:none;}
+  .slider img{
+    flex:0 0 100%;scroll-snap-align:start;object-fit:cover;height:100%;width:100%;
+  }
+  .slider-dots{
+    position:absolute;bottom:10px;left:0;right:0;
+    display:flex;justify-content:center;gap:5px;
+  }
+  .slider-dots i{
+    width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5);
+    display:block;
+  }
+  .slider-dots i.active{background:var(--paper);width:16px;border-radius:4px;}
+  .badge-row{position:absolute;top:10px;left:10px;display:flex;gap:6px;flex-wrap:wrap;max-width:70%;}
+  .badge{
+    font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.04em;
+    padding:4px 8px;border-radius:5px;color:#fff;
+  }
+  .badge.kenya{background:var(--forest);}
+  .badge.import{background:var(--rust);}
+  .badge.p2p{background:#4B4470;}
+  .badge.best{background:var(--marigold-dark);color:#fff;}
+
+  .stamp{
+    position:absolute;top:10px;right:10px;
+    width:60px;height:60px;border-radius:50%;
+    border:2px dashed rgba(255,255,255,0.85);
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;transform:rotate(-12deg);
+    mix-blend-mode:normal;
+    background:rgba(162,39,58,0.18);
+    backdrop-filter:blur(1px);
+  }
+  .stamp span{
+    font-family:'Space Mono',monospace;font-size:8px;font-weight:700;color:#fff;
+    text-transform:uppercase;letter-spacing:0.03em;line-height:1.15;
+  }
+
+  .car-body{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .car-title{font-family:'Bebas Neue',sans-serif;font-size:21px;color:var(--forest);line-height:1;}
+  .car-specs{
+    font-family:'Space Mono',monospace;font-size:11.5px;color:#5b6459;
+    display:flex;flex-wrap:wrap;gap:4px 10px;
+  }
+  .car-seller{font-size:12px;color:#7a8177;}
+  .car-price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:2px;}
+  .car-price{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--ink);}
+  .car-old-price{font-family:'Space Mono',monospace;font-size:12px;text-decoration:line-through;color:#a3ab9e;}
+  .car-ctas{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:4px;}
+  .car-ctas .btn{padding:9px 6px;font-size:11.5px;}
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust-strip{
+    background:var(--forest);color:var(--paper);border-radius:16px;
+    padding:24px 18px;margin-top:34px;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:18px;
+  }
+  .trust-item{display:flex;gap:10px;align-items:flex-start;}
+  .trust-item svg{width:22px;height:22px;flex-shrink:0;color:var(--marigold);}
+  .trust-item h4{font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;margin-bottom:2px;}
+  .trust-item p{font-size:11.5px;color:rgba(255,253,248,0.7);margin:0;line-height:1.4;}
+
+  /* ---------- SELL / P2P CTA ---------- */
+  .sell-band{
+    margin-top:34px;background:var(--marigold);border-radius:18px;padding:26px 20px;
+    position:relative;overflow:hidden;
+  }
+  .sell-band h2{font-size:30px;color:var(--ink);max-width:16ch;}
+  .sell-band p{font-size:13.5px;color:rgba(23,33,28,0.75);max-width:38ch;margin:8px 0 16px;line-height:1.5;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(255,253,248,0.7);margin-top:44px;padding:34px 0 90px;}
+  .footer-grid{display:grid;gap:20px;}
+  footer h3{color:var(--paper);font-size:22px;margin-bottom:8px;}
+  footer .fcol p, footer .fcol a{display:block;font-size:13px;margin-bottom:8px;color:rgba(255,253,248,0.65);}
+  footer .fcol h5{color:var(--marigold);font-family:'Space Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;}
+  .foot-bottom{border-top:1px solid rgba(255,253,248,0.12);margin-top:20px;padding-top:16px;font-size:11px;color:rgba(255,253,248,0.4);}
+
+  /* ---------- FLOATING WHATSAPP ---------- */
+  .float-whatsapp{
+    position:fixed;bottom:18px;right:16px;z-index:60;
+    background:var(--whatsapp);color:#fff;
+    width:56px;height:56px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  }
+  .float-whatsapp svg{width:28px;height:28px;}
+  .float-whatsapp::before{
+    content:'';position:absolute;inset:0;border-radius:50%;
+    box-shadow:0 0 0 0 rgba(37,211,102,0.55);
+    animation:ring 2s infinite;
+  }
+  @keyframes ring{
+    0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}
+    70%{box-shadow:0 0 0 14px rgba(37,211,102,0);}
+    100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
+  }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(23,33,28,0.55);
+    display:none;align-items:flex-end;justify-content:center;z-index:100;
+    backdrop-filter:blur(2px);
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--paper);width:100%;max-width:480px;border-radius:20px 20px 0 0;
+    padding:22px 20px 26px;max-height:88vh;overflow-y:auto;
+    animation:slideup 0.25s ease-out;
+  }
+  @media(min-width:640px){
+    .modal-overlay{align-items:center;}
+    .modal{border-radius:20px;}
+  }
+  @keyframes slideup{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  .modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;}
+  .modal-head h3{font-size:24px;}
+  .modal-close{background:var(--sand);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .modal p.sub{font-size:13px;color:#6b7266;margin:4px 0 16px;}
+  .field{margin-bottom:12px;}
+  .field label{display:block;font-size:11.5px;font-weight:700;color:var(--forest);text-transform:uppercase;letter-spacing:0.03em;margin-bottom:5px;font-family:'Space Mono',monospace;}
+  .field input, .field select, .field textarea{
+    width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);
+    background:var(--sand);font-family:'Inter',sans-serif;font-size:14px;color:var(--ink);
+  }
+  .field textarea{resize:vertical;min-height:70px;}
+
+  /* ---------- DESKTOP ENHANCEMENTS ---------- */
+  @media(min-width:720px){
+    .hero h1{font-size:58px;}
+    .search-card{grid-template-columns:1fr;}
+    .search-row{flex-wrap:nowrap;}
+    .deal-banner{grid-template-columns:1fr 1fr;align-items:stretch;}
+    .deal-banner .deal-img{aspect-ratio:auto;height:100%;}
+    .car-grid{grid-template-columns:repeat(2,1fr);}
+    .trust-strip{grid-template-columns:repeat(4,1fr);}
+    .footer-grid{grid-template-columns:2fr 1fr 1fr 1fr;}
+  }
+  @media(min-width:1024px){
+    .car-grid{grid-template-columns:repeat(3,1fr);}
+    .hero h1{font-size:64px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <div class="brand-mark">P</div>
+      <div class="brand-text">PATRICK <span>CAR DEALER</span></div>
+    </div>
+    <div class="nav-actions">
+      <a class="icon-btn" href="tel:+254712345678" aria-label="Call Patrick Car Dealer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.34 1.79.65 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.42a2 2 0 0 1 2.11-.45c.86.31 1.75.53 2.65.65A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <a class="icon-btn" href="https://wa.me/254712345678" target="_blank" aria-label="WhatsApp Patrick Car Dealer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.2-.4c.1-.1.1-.3 0-.4s-.7-1.6-.9-2.2-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4A3.4 3.4 0 0 0 5.8 10a5.9 5.9 0 0 0 1.3 3.2A13.4 13.4 0 0 0 12.2 18c.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1a3.2 3.2 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">● Nairobi · Kenya</span>
+    <h1>Find your next car <em>without the runaround.</em></h1>
+    <p>Verified dealer stock, fresh imports, and real owners selling directly — all inspected, all in one place.</p>
+
+    <div class="search-card">
+      <div class="search-row">
+        <input type="text" id="searchInput" placeholder="Search e.g. Toyota Axio, Prado, Demio">
+      </div>
+      <div class="search-row">
+        <select id="budgetSelect">
+          <option value="">Any budget</option>
+          <option value="1000000">Under KSh 1M</option>
+          <option value="2000000">Under KSh 2M</option>
+          <option value="4000000">Under KSh 4M</option>
+          <option value="99999999">KSh 4M+</option>
+        </select>
+        <button class="search-btn" id="searchBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- DEAL OF THE DAY -->
+  <section class="section" id="deal">
+    <div class="section-head">
+      <h2>Deal of the day</h2>
+      <span class="tag-count mono">resets at midnight</span>
+    </div>
+    <div class="deal-banner" id="dealBanner"></div>
+  </section>
+
+  <!-- LISTINGS -->
+  <section class="section" id="listings">
+    <div class="section-head">
+      <h2>Browse the lot</h2>
+      <span class="tag-count mono" id="resultCount"></span>
+    </div>
+    <div class="chip-row" id="chipRow">
+      <button class="chip active" data-filter="all">All listings</button>
+      <button class="chip" data-filter="kenya">Kenya stock</button>
+      <button class="chip" data-filter="import">Fresh imports</button>
+      <button class="chip" data-filter="p2p">Peer-to-peer</button>
+      <button class="chip" data-filter="best">Best value</button>
+    </div>
+    <div class="car-grid" id="carGrid"></div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <section class="trust-strip">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div><h4>Verified sellers</h4><p>Every dealer and owner listing is checked before it goes live.</p></div>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+      <div><h4>Duty cleared imports</h4><p>Import status is shown upfront — no surprises at KRA.</p></div>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+      <div><h4>Clean logbooks</h4><p>Ownership documents confirmed before any listing is approved.</p></div>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <div><h4>Fast response</h4><p>Message any listing on WhatsApp and hear back the same day.</p></div>
+    </div>
+  </section>
+
+  <!-- SELL YOUR CAR -->
+  <section class="sell-band">
+    <h2>Selling your own car? List it free.</h2>
+    <p>Skip the dealer margin. Reach thousands of serious buyers directly on the peer-to-peer marketplace — Patrick Car Dealer just handles the introductions.</p>
+    <button class="btn btn-block" style="background:var(--ink);color:var(--paper);max-width:240px;" id="sellBtn">List your car</button>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-grid">
+    <div class="fcol">
+      <h3>Patrick Car Dealer</h3>
+      <p>Nairobi's marketplace for Kenya-available stock, fresh imports and owner-to-owner listings — all vetted, all in one place.</p>
+    </div>
+    <div class="fcol">
+      <h5>Browse</h5>
+      <a href="#listings">Kenya stock</a>
+      <a href="#listings">Fresh imports</a>
+      <a href="#listings">Peer-to-peer</a>
+      <a href="#deal">Deal of the day</a>
+    </div>
+    <div class="fcol">
+      <h5>Contact</h5>
+      <a href="tel:+254712345678">+254 712 345 678</a>
+      <a href="https://wa.me/254712345678" target="_blank">WhatsApp us</a>
+      <p>Ngong Road, Nairobi</p>
+    </div>
+    <div class="fcol">
+      <h5>Hours</h5>
+      <p>Mon – Sat, 8am – 6pm</p>
+      <p>Sun by appointment</p>
+    </div>
+  </div>
+  <div class="container foot-bottom">© 2026 Patrick Car Dealer. All vehicles subject to availability.</div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a class="float-whatsapp" href="https://wa.me/254712345678?text=Hi%20Patrick%20Car%20Dealer%2C%20I%27d%20like%20to%20ask%20about%20a%20car." target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.2-.4c.1-.1.1-.3 0-.4s-.7-1.6-.9-2.2-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4A3.4 3.4 0 0 0 5.8 10a5.9 5.9 0 0 0 1.3 3.2A13.4 13.4 0 0 0 12.2 18c.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1a3.2 3.2 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
+<!-- ENQUIRY / BUY MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">Make an enquiry</h3>
+      <button class="modal-close" id="modalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <p class="sub" id="modalSub">Tell us a bit about you — we'll come back to you on WhatsApp or by call.</p>
+    <form id="enquiryForm">
+      <div class="field">
+        <label for="fName">Your name</label>
+        <input type="text" id="fName" required placeholder="e.g. Grace Wanjiru">
+      </div>
+      <div class="field">
+        <label for="fPhone">Phone number</label>
+        <input type="tel" id="fPhone" required placeholder="07XX XXX XXX">
+      </div>
+      <div class="field">
+        <label for="fCar">Car of interest</label>
+        <input type="text" id="fCar" placeholder="e.g. Toyota Axio 2015">
+      </div>
+      <div class="field">
+        <label for="fMessage">Message (optional)</label>
+        <textarea id="fMessage" placeholder="Any questions — mileage, price negotiation, viewing time..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-whatsapp btn-block" style="padding:13px;font-size:14px;">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.2-.4c.1-.1.1-.3 0-.4s-.7-1.6-.9-2.2-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4A3.4 3.4 0 0 0 5.8 10a5.9 5.9 0 0 0 1.3 3.2A13.4 13.4 0 0 0 12.2 18c.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1a3.2 3.2 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        Send via WhatsApp
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+const DEALER_PHONE = "254712345678"; // replace with real WhatsApp business number
+
+// ---------- CAR DATA ----------
+const CARS = [
+  {
+    id:1, title:"Toyota Axio 2015", category:"kenya", seller:"Patrick Car Dealer",
+    year:2015, mileage:"78,000 km", trans:"Auto", fuel:"Petrol",
+    price:1150000, oldPrice:1350000, bestValue:true,
+    badges:["kenya","best"], stamp:"NTSA\nVerified",
+    images:["1503376780353-7e6692767b70","1494976388531-d1058494cdd8","1552580990-9ce0e0d5c8b6"]
+  },
+  {
+    id:2, title:"Toyota Premio 2013", category:"kenya", seller:"Patrick Car Dealer",
+    year:2013, mileage:"102,000 km", trans:"Auto", fuel:"Petrol",
+    price:1450000, oldPrice:null, bestValue:false,
+    badges:["kenya"], stamp:"Accident\nFree",
+    images:["1568605114967-8130f3a36994","1494976388531-d1058494cdd8","1552580990-9ce0e0d5c8b6"]
+  },
+  {
+    id:3, title:"Mazda Demio 2017", category:"kenya", seller:"Patrick Car Dealer",
+    year:2017, mileage:"54,000 km", trans:"Auto", fuel:"Petrol",
+    price:980000, oldPrice:1120000, bestValue:true,
+    badges:["kenya","best"], stamp:"Logbook\nClean",
+    images:["1533473359331-0135ef1b58bf","1494976388531-d1058494cdd8","1552580990-9ce0e0d5c8b6"]
+  },
+  {
+    id:4, title:"Subaru Forester 2016", category:"import", seller:"Direct import",
+    year:2016, mileage:"61,000 km", trans:"Auto", fuel:"Petrol",
+    price:2350000, oldPrice:null, bestValue:false,
+    badges:["import"], stamp:"Duty\nCleared",
+    images:["1541899481282-d53bffe3c35d","1494976388531-d1058494cdd8","1552580990-9ce0e0d5c8b6"]
+  },
+  {
+    id:5, title:"Mercedes-Benz C200 2018", category:"import", seller:"Direct import",
+    year:2018, mileage:"39,000 km", trans:"Auto", fuel:"Petrol",
+    price:4650000, oldPrice:5100000, bestValue:true,
+    badges:["import","best"], stamp:"Duty\nCleared",
+    images:["1519641471654-76ce0107ad1b","1494976388531-d1058494cdd8","1552580990-9ce0e0d5c8b6"]
+  },
+  {
+    id:6, title:"Toyota Land Cruiser Prado 2014", category:"p2p", seller:"Owner: David M.",
+    year:2014, mileage:"115,000 km", trans:"Auto", fuel:"Diesel",
+    price:5200000, oldPrice:null, bestValue:false,
+    badges:["p2p"], stamp:"Owner\nVerified",
+    images:["1583121274602-3e2820c69888","1494976388531-d1058494cdd8","1552580990-9ce0e0d5c8b6"]
+  },
+  {
+    id:7, title:"Nissan Note 2016", category:"kenya", seller:"Patrick Car Dealer",
+    year:2016, mileage:"67,000 km", trans:"Auto", fuel:"Petrol",
+    price:890000, oldPrice:null, bestValue:false,
+    badges:["kenya"], stamp:"NTSA\nVerified",
+    images:["1580273916550-e323be2ae537","1494976388531-d1058494cdd8","1552580990-9ce0e0d5c8b6"]
+  },
+  {
+    id:8, title:"Honda Fit 2015", category:"p2p", seller:"Owner: Susan K.",
+    year:2015, mileage:"88,000 km", trans:"Auto", fuel:"Petrol",
+    price:950000, oldPrice:1050000, bestValue:true,
+    badges:["p2p","best"], stamp:"Owner\nVerified",
+    images:["1605559424843-9e4c228bf1c2","1494976388531-d1058494cdd8","1552580990-9ce0e0d5c8b6"]
+  },
+  {
+    id:9, title:"Mitsubishi Outlander 2017", category:"import", seller:"Direct import",
+    year:2017, mileage:"46,000 km", trans:"Auto", fuel:"Petrol",
+    price:2650000, oldPrice:null, bestValue:false,
+    badges:["import"], stamp:"Duty\nCleared",
+    images:["1502877338535-766e1452684a","1494976388531-d1058494cdd8","1552580990-9ce0e0d5c8b6"]
+  }
+];
+
+const DEAL_OF_DAY = CARS[0];
+
+function img(id, w=800){
+  return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=60`;
+}
+function ksh(n){
+  return "KSh " + n.toLocaleString("en-KE");
+}
+function badgeLabel(b){
+  return {kenya:"Kenya Stock", import:"Fresh Import", p2p:"Peer-to-Peer", best:"Best Value"}[b] || b;
+}
+
+// ---------- RENDER DEAL BANNER ----------
+function renderDeal(){
+  const c = DEAL_OF_DAY;
+  document.getElementById("dealBanner").innerHTML = `
+    <div class="deal-img">
+      <img src="${img(c.images[0],900)}" alt="${c.title}">
+      <span class="deal-ribbon"><span class="dot"></span> Today only</span>
+    </div>
+    <div class="deal-body">
+      <h3>${c.title}</h3>
+      <div class="deal-specs mono">${c.year} · ${c.mileage} · ${c.trans} · ${c.fuel}</div>
+      <div class="deal-price-row">
+        <span class="deal-price mono">${ksh(c.price)}</span>
+        ${c.oldPrice ? `<span class="deal-old">${ksh(c.oldPrice)}</span>` : ""}
+      </div>
+      <div class="countdown mono" id="countdown">
+        <div><span id="cdH">00</span><small>hrs</small></div>
+        <div><span id="cdM">00</span><small>min</small></div>
+        <div><span id="cdS">00</span><small>sec</small></div>
+      </div>
+      <div class="deal-ctas">
+        <button class="btn btn-buy" data-buy="${c.id}">Buy now</button>
+        <a class="btn btn-whatsapp" href="${waLink(c,'whatsapp')}" target="_blank">WhatsApp</a>
+        <a class="btn btn-ghost" href="tel:+${DEALER_PHONE}">Call now</a>
+      </div>
+    </div>
+  `;
+}
+
+function tickCountdown(){
+  const now = new Date();
+  const end = new Date();
+  end.setHours(24,0,0,0);
+  let diff = Math.max(0, end - now);
+  const h = String(Math.floor(diff/3600000)).padStart(2,"0");
+  const m = String(Math.floor((diff%3600000)/60000)).padStart(2,"0");
+  const s = String(Math.floor((diff%60000)/1000)).padStart(2,"0");
+  const eh=document.getElementById("cdH"), em=document.getElementById("cdM"), es=document.getElementById("cdS");
+  if(eh){eh.textContent=h; em.textContent=m; es.textContent=s;}
+}
+
+// ---------- WHATSAPP LINK BUILDER ----------
+function waLink(car, mode){
+  let text = mode === "buy"
+    ? `Hi Patrick Car Dealer, I'd like to BUY the ${car.title} listed at ${ksh(car.price)}. Is it still available?`
+    : `Hi Patrick Car Dealer, I'm enquiring about the ${car.title} listed at ${ksh(car.price)}.`;
+  return `https://wa.me/${DEALER_PHONE}?text=${encodeURIComponent(text)}`;
+}
+
+// ---------- RENDER CARDS ----------
+function cardHTML(c){
+  const slides = c.images.map(id => `<img src="${img(id)}" alt="${c.title}" loading="lazy">`).join("");
+  const dots = c.images.map((_,i)=>`<i class="${i===0?'active':''}"></i>`).join("");
+  const badges = c.badges.map(b=>`<span class="badge ${b}">${badgeLabel(b)}</span>`).join("");
+  return `
+    <article class="car-card" data-cat="${c.category}" data-best="${c.bestValue}">
+      <div class="slider-wrap">
+        <div class="slider" data-slider>${slides}</div>
+        <div class="badge-row">${badges}</div>
+        <div class="stamp"><span>${c.stamp.replace("\n","<br>")}</span></div>
+        <div class="slider-dots" data-dots>${dots}</div>
+      </div>
+      <div class="car-body">
+        <div class="car-title">${c.title}</div>
+        <div class="car-specs mono">${c.year} · ${c.mileage} · ${c.trans} · ${c.fuel}</div>
+        <div class="car-seller">${c.seller}</div>
+        <div class="car-price-row">
+          <span class="car-price mono">${ksh(c.price)}</span>
+          ${c.oldPrice ? `<span class="car-old-price">${ksh(c.oldPrice)}</span>` : ""}
+        </div>
+        <div class="car-ctas">
+          <a class="btn btn-whatsapp" href="${waLink(c,'enquire')}" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.2-.4c.1-.1.1-.3 0-.4s-.7-1.6-.9-2.2-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4A3.4 3.4 0 0 0 5.8 10a5.9 5.9 0 0 0 1.3 3.2A13.4 13.4 0 0 0 12.2 18c.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1a3.2 3.2 0 0 0 2.1-1.5 2.6 2.6 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          </a>
+          <a class="btn btn-call" href="tel:+${DEALER_PHONE}">Call</a>
+          <button class="btn btn-buy" data-buy="${c.id}">Buy now</button>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+let activeFilter = "all";
+let searchTerm = "";
+let budgetCap = "";
+
+function applyFilters(){
+  return CARS.filter(c=>{
+    if(activeFilter!=="all"){
+      if(activeFilter==="best" && !c.bestValue) return false;
+      if(["kenya","import","p2p"].includes(activeFilter) && c.category!==activeFilter) return false;
+    }
+    if(searchTerm && !c.title.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+    if(budgetCap && c.price > Number(budgetCap)) return false;
+    return true;
+  });
+}
+
+function renderGrid(){
+  const list = applyFilters();
+  document.getElementById("carGrid").innerHTML = list.map(cardHTML).join("") ||
+    `<p style="grid-column:1/-1;text-align:center;color:#7a8177;padding:30px 0;">No cars match that search yet — try a different make or budget.</p>`;
+  document.getElementById("resultCount").textContent = `${list.length} car${list.length!==1?"s":""}`;
+  initSliders();
+  bindBuyButtons();
+}
+
+// ---------- SLIDER DOT SYNC ----------
+function initSliders(){
+  document.querySelectorAll("[data-slider]").forEach(slider=>{
+    const dotsWrap = slider.parentElement.querySelector("[data-dots]");
+    const dots = dotsWrap.querySelectorAll("i");
+    slider.addEventListener("scroll", ()=>{
+      const idx = Math.round(slider.scrollLeft / slider.clientWidth);
+      dots.forEach((d,i)=>d.classList.toggle("active", i===idx));
+    }, {passive:true});
+  });
+}
+
+// ---------- MODAL ----------
+const overlay = document.getElementById("modalOverlay");
+const modalTitle = document.getElementById("modalTitle");
+const modalSub = document.getElementById("modalSub");
+const fCar = document.getElementById("fCar");
+let modalMode = "enquire";
+let modalCar = null;
+
+function openModal(car, mode){
+  modalCar = car; modalMode = mode;
+  if(mode==="buy"){
+    modalTitle.textContent = "Buy this car";
+    modalSub.textContent = "Confirm your details and we'll lock in the deal and arrange a viewing.";
+  } else if(mode==="sell"){
+    modalTitle.textContent = "List your car";
+    modalSub.textContent = "Tell us about your car — we'll get back to you to publish it on the marketplace.";
+  } else {
+    modalTitle.textContent = "Make an enquiry";
+    modalSub.textContent = "Tell us a bit about you — we'll come back to you on WhatsApp or by call.";
+  }
+  fCar.value = car ? car.title : "";
+  fCar.placeholder = mode==="sell" ? "e.g. Toyota Vitz 2016, 90,000km" : "e.g. Toyota Axio 2015";
+  overlay.classList.add("open");
+}
+function closeModal(){ overlay.classList.remove("open"); }
+
+document.getElementById("modalClose").addEventListener("click", closeModal);
+overlay.addEventListener("click", e=>{ if(e.target===overlay) closeModal(); });
+
+document.getElementById("enquiryForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const name = document.getElementById("fName").value.trim();
+  const phone = document.getElementById("fPhone").value.trim();
+  const car = fCar.value.trim();
+  const message = document.getElementById("fMessage").value.trim();
+
+  let text;
+  if(modalMode==="sell"){
+    text = `Hi Patrick Car Dealer, I'd like to LIST my car for sale.\nName: ${name}\nPhone: ${phone}\nCar: ${car}\nDetails: ${message||"-"}`;
+  } else if(modalMode==="buy"){
+    text = `Hi Patrick Car Dealer, I want to BUY: ${car}.\nName: ${name}\nPhone: ${phone}\nNote: ${message||"-"}`;
+  } else {
+    text = `Hi Patrick Car Dealer, I have an enquiry about: ${car}.\nName: ${name}\nPhone: ${phone}\nMessage: ${message||"-"}`;
+  }
+  window.open(`https://wa.me/${DEALER_PHONE}?text=${encodeURIComponent(text)}`, "_blank");
+  closeModal();
+  e.target.reset();
+});
+
+function bindBuyButtons(){
+  document.querySelectorAll("[data-buy]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const car = CARS.find(c=>c.id===Number(btn.dataset.buy));
+      openModal(car, "buy");
+    });
+  });
+}
+
+document.getElementById("sellBtn").addEventListener("click", ()=> openModal(null, "sell"));
+
+// ---------- CHIPS / SEARCH ----------
+document.getElementById("chipRow").addEventListener("click", e=>{
+  const chip = e.target.closest(".chip");
+  if(!chip) return;
+  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+  chip.classList.add("active");
+  activeFilter = chip.dataset.filter;
+  renderGrid();
+});
+
+document.getElementById("searchBtn").addEventListener("click", ()=>{
+  searchTerm = document.getElementById("searchInput").value;
+  budgetCap = document.getElementById("budgetSelect").value;
+  renderGrid();
+  document.getElementById("listings").scrollIntoView({behavior:"smooth"});
+});
+document.getElementById("searchInput").addEventListener("keydown", e=>{
+  if(e.key==="Enter"){ document.getElementById("searchBtn").click(); }
+});
+
+// ---------- INIT ----------
+renderDeal();
+tickCountdown();
+setInterval(tickCountdown, 1000);
+renderGrid();
+</script>
+</body>
+</html>
